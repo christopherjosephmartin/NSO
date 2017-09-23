@@ -1,0 +1,26 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="vlan">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <name>{/device}</name>
+      <config>
+        <vlan xmlns="http://tail-f.com/ned/cisco-nx">
+          <vlan-list>
+            <id>{/vlan-id}</id>
+            <name>{/vlan-name}</name>
+          </vlan-list>
+        </vlan>
+        <interface xmlns="http://tail-f.com/ned/cisco-nx">
+          <Ethernet>
+            <name>{/intf-number}</name>
+            <switchport>
+              <access>
+                <vlan>{/vlan-id}</vlan>
+              </access>
+            </switchport>
+          </Ethernet>
+        </interface>
+      </config>
+    </device>
+  </devices>
+</config-template>

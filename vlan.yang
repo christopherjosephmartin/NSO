@@ -1,0 +1,52 @@
+module vlan {
+  namespace "http://com/example/vlan";
+  prefix vlan;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+
+  augment /ncs:services {
+    list vlan {
+      key servicename;
+      unique vlan-id;
+
+      uses ncs:service-data;
+      ncs:servicepoint "vlan";
+
+      leaf servicename {
+        tailf:info "Service Instance Name";
+        type string;
+      }
+      leaf device {
+        tailf:info "Leaf Switch Name";
+        mandatory true;    
+        type leafref {
+          path "/ncs:devices/ncs:device/ncs:name";
+        }
+      }
+      leaf vlan-id {
+        tailf:info "Unique VLAN ID";
+        mandatory true;
+        type uint16;
+      }
+      leaf vlan-name {
+        tailf:info "VLAN Name";
+        type string;      
+      }
+      leaf intf-number {
+        tailf:info "Interface ID";
+        mandatory true;
+        type string {
+          pattern "[0-9]{1,2}(/[0-9]{1,2}){1,4}";
+        }
+      }
+    }
+  }
+}
