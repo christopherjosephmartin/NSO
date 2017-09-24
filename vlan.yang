@@ -1,4 +1,4 @@
-module vlan {
+module vlans {
   namespace "http://com/example/vlan";
   prefix vlan;
 
